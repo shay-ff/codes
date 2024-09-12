@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+template<typename T> using MaxHeap = std::priority_queue<T>;
+template<typename T> using MinHeap = std::priority_queue<T, std::vector<T>, std::greater<T>>;
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>pqq</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

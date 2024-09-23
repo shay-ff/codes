@@ -23,7 +23,8 @@ const lli N = 200200, INF = 8e18, MOD = 1000000007; // 1000000009, 1000000023, 1
 // lb(x) : first greater or equal than x, ub(x) : first greater than x
 template <class T> bool setmin(T &a, const T &b) { return b < a ? a = b, 1 : 0; }
 template <class T> bool setmax(T &a, const T &b) { return b > a ? a = b, 1 : 0; }
-
+template<typename T> using MaxHeap = std::priority_queue<T>;
+template<typename T> using MinHeap = std::priority_queue<T, std::vector<T>, std::greater<T>>;
     `;
 
     // Function to insert template above existing code in LeetCode's Monaco editor

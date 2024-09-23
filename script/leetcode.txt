@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.6
 // @description  Automatically inserts your C++ template above the existing code in LeetCode problems
-// @author       Your Name
+// @author       me & chatgpt
 // @match        https://leetcode.com/problems/*
 // @grant        none
 // ==/UserScript==

@@ -1,0 +1,54 @@
+// ==UserScript==
+// @name         LeetCode C++ Template Inserter
+// @namespace    http://tampermonkey.net/
+// @version      0.6
+// @description  Automatically inserts your C++ template above the existing code in LeetCode problems
+// @author       Your Name
+// @match        https://leetcode.com/problems/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Your C++ template
+    const cppTemplate = `
+#define lli int64_t
+#define all(v) (v).begin(),(v).end()
+#define allr(v) (v).rbegin(),(v).rend()
+#define re(x) return x
+#define sz(x) (lli)s.size()
+#define yesno(x) cout << ((x) ? "YES\\n" : "NO\\n")
+const lli N = 200200, INF = 8e18, MOD = 1000000007; // 1000000009, 1000000023, 1000000007, 998244353
+// lb(x) : first greater or equal than x, ub(x) : first greater than x
+template <class T> bool setmin(T &a, const T &b) { return b < a ? a = b, 1 : 0; }
+template <class T> bool setmax(T &a, const T &b) { return b > a ? a = b, 1 : 0; }
+
+    `;
+
+    // Function to insert template above existing code in LeetCode's Monaco editor
+    function insertTemplate() {
+        const editor = window.monaco && window.monaco.editor.getModels()[0];
+        if (editor) {
+            const currentCode = editor.getValue();
+            if (!currentCode.startsWith(cppTemplate.trim())) {  // Avoid inserting template multiple times
+                editor.setValue(cppTemplate + '\n' + currentCode);  // Insert template above existing code
+            }
+        }
+    }
+
+    // Wait for Monaco editor to load fully before inserting the template
+    function waitForEditor() {
+        const editorLoaded = window.monaco && window.monaco.editor && window.monaco.editor.getModels().length > 0;
+        if (editorLoaded) {
+            insertTemplate();  // Insert template when editor is available
+        } else {
+            setTimeout(waitForEditor, 500);  // Retry every 500ms if editor isn't ready
+        }
+    }
+
+    // Wait for page to fully load before starting the waitForEditor function
+    window.addEventListener('load', function() {
+        setTimeout(waitForEditor, 500);  // Start checking after a brief delay
+    });
+})();
